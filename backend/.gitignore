@@ -1,0 +1,7 @@
+.venv/
+.env
+artifacts/
+models/*.joblib
+__pycache__/
+*.db
+data/raw/
