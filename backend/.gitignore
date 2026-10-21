@@ -1,7 +1,22 @@
+# Python virtual environments
 .venv/
+venv/
+
+# Secrets
 .env
-artifacts/
-models/*.joblib
+.env.*
+!.env.example
+
+# Python cache
 __pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local databases
 *.db
+
+# Generated artifacts
+artifacts/
+
+# Raw data - exclude only if it contains sensitive or unnecessary data
 data/raw/

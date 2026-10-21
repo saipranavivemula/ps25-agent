@@ -1,0 +1,16 @@
+From: AcmePay Newsletter <news@acmepay.com>
+To: student@example.com
+Subject: Your October product update
+Date: Mon, 19 Oct 2026 09:00:00 +0000
+Message-ID: <news-001@acmepay.com>
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=acmepay.com; dkim=pass header.d=acmepay.com; dmarc=pass header.from=acmepay.com
+Return-Path: <news@acmepay.com>
+Received: from mail.acmepay.com (mail.acmepay.com [203.0.113.10]) by mx.example.com with ESMTPS; Mon, 19 Oct 2026 09:00:05 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Hello,</p>
+<p>Here is what is new at AcmePay this month. Read the full update on our <a href="https://www.acmepay.com/blog/october">blog</a>.</p>
+<p>Manage your preferences at <a href="https://www.acmepay.com/preferences">acmepay.com/preferences</a>.</p>
+</body></html>

@@ -1,0 +1,23 @@
+# Python environments
+.venv/
+backend/.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local databases
+*.db
+
+# Temporary files
+*.log
+.DS_Store

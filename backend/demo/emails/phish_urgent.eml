@@ -1,0 +1,19 @@
+From: AcmePay Security <security@acmepay-alerts.com>
+Reply-To: helpdesk@support-mail-center.net
+To: student@example.com
+Subject: URGENT: Your account will be suspended in 24 hours
+Date: Mon, 19 Oct 2026 10:15:00 +0000
+Message-ID: <x93-77@mailer-77.example.net>
+Authentication-Results: mx.example.com; spf=fail smtp.mailfrom=acmepay-alerts.com; dkim=fail (no signature); dmarc=fail header.from=acmepay-alerts.com
+Return-Path: <bounce@mailer-77.example.net>
+Received: from unknown (unknown [198.51.100.23]) by mx.example.com with SMTP; Mon, 19 Oct 2026 10:15:02 +0000
+Received: from relay2.example.net (relay2.example.net [198.51.100.9]) by unknown with SMTP; Mon, 19 Oct 2026 10:14:58 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Dear customer,</p>
+<p>We detected unusual activity. Your account will be <b>suspended in 24 hours</b> unless you verify your identity immediately.</p>
+<p><a href="http://acmepay-secure-login.com/verify?id=88213">https://www.acmepay.com/verify</a></p>
+<p>Confirm your password and card number to keep your account active.</p>
+</body></html>

@@ -1,0 +1,55 @@
+{
+  "validation": {
+    "n": 660,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "confusion": [
+      [
+        330,
+        0
+      ],
+      [
+        0,
+        330
+      ]
+    ]
+  },
+  "test": {
+    "n": 660,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "confusion": [
+      [
+        330,
+        0
+      ],
+      [
+        0,
+        330
+      ]
+    ]
+  },
+  "demo_test": {
+    "n": 50,
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1": 0.8889,
+    "false_positive_rate": 0.0,
+    "confusion": [
+      [
+        25,
+        0
+      ],
+      [
+        5,
+        20
+      ]
+    ]
+  },
+  "model": "tfidf_logreg",
+  "trained_on": "synthetic emails (data/train.csv)"
+}

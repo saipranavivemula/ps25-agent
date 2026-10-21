@@ -1,0 +1,51 @@
+text,label,kind
+Verify your CampusConnect account now. Your student ID will be cancelled and your hall ticket withheld unless you confirm your password: http://campusconnect-id-verify.com/login,1,student_id
+"Hi Rahul, can you review the pull request I opened this morning? It fixes the login bug we discussed yesterday. I think it is ready to merge after one more look.",0,code_review
+URGENT: Your email password expires in 2 hours. Click Keep my password to continue using your account. http://webmail-password-keep.com/session,1,password
+"Hello Karthik, thanks for registering for the Cybersecurity workshop on 12 November. The venue is Seminar Hall A. Please bring your college ID card.",0,workshop
+"Your income tax refund of Rs 18,240 has been approved. Submit your debit card number and CVV to receive the credit: http://incometax-refund-claim.xyz/apply",1,tax_refund
+"Reminder: your electricity bill of Rs 1,430 is due on 20 November. You can pay through the official app or at the nearest counter. Ignore this if you have already paid.",0,bill_reminder
+"Dear sir, I am a finance manager of a company in Dubai and need your help to transfer 4.5 million dollars. You will receive 30 percent. Reply with your bank account details.",1,advance_fee
+Aadhaar update required: your Aadhaar will be deactivated if you do not verify within 24 hours. Verify with OTP here: http://aadhaar-verify-now.info/otp,1,aadhaar
+"We received a request to reset the password for your account. If you made this request, tap the reset button in the app. If you did not, you can ignore this email.",0,reset
+"Dear students, the internal assessment timetable has been published on the college website. Please check your batch and report any clashes to the exam cell by Monday.",0,college
+"Your payment of Rs 1,250 to ShopKart was successful. Receipt number 77129. If you did not authorise this payment, contact us through the help section of the app.",0,payment_ok
+"Your invoice for the broadband plan is ready. Amount due Rs 799, due date 15 November. You can pay in the app or at any authorised store.",0,invoice
+Your GreenLeaf Bank statement for October is now available in net banking. For your security we never ask for your PIN or password by email.,0,statement
+HR Notice: the updated work-from-home policy and your October salary slip are attached. Sign in with your company email and password to open the document: http://hr-portal-docs.online/login,1,hr_doc
+"Hi, this is the IT helpdesk. Your mailbox is 98% full and will stop receiving mail today. Re-validate your storage at http://mailbox-quota-check.net/renew to avoid losing messages.",1,scam_email
+Congratulations on completing the Python course! Your certificate is attached. You can also download it from your dashboard after logging in to the official portal.,0,certificate
+"Hi, it's your boss. I am in a meeting and need you to buy 5 gift cards of Rs 2,000 right away and send me the codes. Do not call me, reply here quickly.",1,ceo_fraud
+Your CloudBox storage is full. Upgrade now or all your photos will be deleted in 24 hours: http://cloudstore-upgrade-now.net/plans,1,storage
+"Courier customs clearance pending: your international package is held. Pay Rs 3,200 duty at http://customs-duty-pay.xyz/track to release it today.",1,customs
+Team lunch tomorrow at 1 PM at the canteen. Let me know if you have any dietary preferences.,0,lunch
+Your package could not be delivered because no one was home. A new delivery will be attempted tomorrow between 10 AM and 6 PM. No payment is needed.,0,delivery
+"Dear user, your Wi-Fi subscription is expiring. Renew at a special 70 percent discount using this link and enter your net banking credentials: http://broadband-renew-offer.online/pay",1,broadband
+"Welcome to CloudBox! Your account is ready. Here are three tips to get started: upload your first file, invite a teammate, and install the desktop app.",0,welcome
+Your parcel from Zentra could not be delivered because the address is incomplete. Pay a redelivery fee of Rs 29 to reschedule: http://zentra-post-delivery.co/pay,1,parcel
+"Hi Priya, attaching the minutes of today's meeting. Action items: Arjun to finalise the dataset, Sneha to test the API, and I will book the demo room.",0,minutes
+"Your GreenLeaf Bank debit card has been blocked. To unblock it, confirm your card number, expiry date and PIN: http://greenleafbank-unblock.info/card",1,card_block
+"Your subscription to StreamNest renews on 5 November for Rs 199. No action is needed. You can cancel any time from Settings, Account.",0,renewal
+Your SwiftWallet KYC has expired. As per RBI guidelines your wallet will be blocked in 6 hours. Update your PAN and Aadhaar here: http://swiftwallet-kyc.in.net/update,1,kyc
+"Dear parent, the parent teacher meeting is scheduled for Saturday at 10 AM. Please confirm your attendance by replying to this email.",0,parent_meeting
+A document was shared with you. View invoice_4821.pdf. You must sign in with your email and password to open the file. http://shared-docs-view.net/open,1,shared_doc
+Notice: the library will be closed this Saturday for maintenance. Books due on Saturday can be returned on Monday without any fine.,0,library
+"Dear customer, your credit card reward points worth Rs 9,800 will expire today. Redeem now by logging in: http://rewards-redeem-today.online/login",1,rewards
+"We have updated our privacy policy. The changes take effect on 1 December. You can read a summary on our website, and no action is required from you.",0,policy
+Your order #48213 from ShopKart has been shipped and will arrive by Thursday. You can track it from the Orders section of the app. Thank you for shopping with us.,0,order
+"Your verification code is 482913. It expires in 10 minutes. Do not share this code with anyone, our staff will never ask for it.",0,otp
+"Dear Student, your scholarship payment is on hold because of wrong bank details. Re-enter your account number and OTP at http://scholarship-portal-update.info/form",1,scholarship
+"You have received a payment request of Rs 4,999. Open the link to accept the refund: http://upi-refund-claim.online/r/48213 and enter your UPI PIN to receive the money.",1,upi
+"Hello, I saw your profile and would like to offer you a part time job. Earn Rs 5000 per day by liking videos. Message us on Telegram to start. Registration fee Rs 500.",1,job_scam
+"Weekly newsletter: three new features in the app, a guide to budgeting for students, and an interview with our design team. Read the full issue on our blog.",0,newsletter
+Urgent: tomorrow's 9 AM lecture is shifted to 11 AM because of the faculty meeting. Please inform your classmates.,0,class_shift
+"Security notice: we noticed a sign-in to your account from a new laptop in Mysuru. If this was you, no action is needed. If not, change your password from the official app.",0,security_notice
+Your invoice is overdue and legal action will begin tomorrow. Download the invoice from http://invoice-download-legal.net/view and confirm your company login.,1,legal_threat
+Final notice: your electricity connection will be disconnected tonight at 9:30 PM because last month's bill is unpaid. Click http://bill-clear-now.xyz to pay at once.,1,utility
+"Action required: please confirm your email address to finish creating your account. This link is valid for 24 hours. If you did not sign up, ignore this message.",0,confirm_email
+Security alert: someone tried to sign in to your GreenLeaf Bank account from another country. Secure your account immediately: http://greenleafbank-secure.com/verify,1,bank_alert
+"Congratulations! Your mobile number won the lucky draw of 25 lakh rupees. To claim your prize, pay a processing fee of Rs 1,500 and share your bank details on WhatsApp.",1,lottery
+"Your flight booking is confirmed. Departure Bengaluru 06:45, arrival Delhi 09:30. Web check-in opens 48 hours before departure on our official website.",0,flight
+"Hi team, reminder that the project demo is on Friday at 3 PM in Lab 2. Please upload your slides to the shared drive by Thursday evening. Thanks, Meera",0,meeting
+We noticed your Zentra Prime membership payment failed. Your benefits will end today. Update your card details: http://zentra-prime-billing.com/update,1,billing
+"Your SwiftWallet account was accessed from a new device. If this was not you, log in now and cancel the request within 30 minutes: http://swiftwallet-cancel-request.com/login",1,new_device

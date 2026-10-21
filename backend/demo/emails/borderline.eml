@@ -1,0 +1,15 @@
+From: AcmeBank Alerts <alerts@acmebank.com>
+To: student@example.com
+Subject: New sign-in to your account - please verify it was you
+Date: Mon, 19 Oct 2026 11:30:00 +0000
+Message-ID: <alert-5521@acmebank.com>
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=acmebank.com; dkim=pass header.d=acmebank.com; dmarc=pass header.from=acmebank.com
+Return-Path: <alerts@acmebank.com>
+Received: from mail.acmebank.com (mail.acmebank.com [203.0.113.40]) by mx.example.com with ESMTPS; Mon, 19 Oct 2026 11:30:03 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Hi,</p>
+<p>We noticed a new sign-in to your AcmeBank account from a new device. If this was you, no action is needed. If not, please <a href="https://www.acmebank.com/security/verify">review the sign-in</a> and secure your account.</p>
+</body></html>
