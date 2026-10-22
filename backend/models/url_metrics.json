@@ -1,0 +1,8 @@
+{
+  "model": "random_forest",
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "auc": 1.0,
+  "n_test": 60
+}
