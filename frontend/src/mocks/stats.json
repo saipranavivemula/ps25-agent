@@ -1,0 +1,10 @@
+{
+  "total": 142,
+  "by_decision": { "high": 18, "medium": 34, "low": 90 },
+  "median_detection_seconds": 4.2,
+  "per_hour": [
+    { "hour": "08:00", "count": 12 },
+    { "hour": "09:00", "count": 25 },
+    { "hour": "10:00", "count": 18 }
+  ]
+}

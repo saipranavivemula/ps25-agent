@@ -1,0 +1,75 @@
+[
+  {
+    "id": 101,
+    "created_at": "2026-10-19T10:00:00Z",
+    "source": "email_gateway",
+    "target": "acmepay-secure-login.com",
+    "target_type": "url",
+    "status": "awaiting_review",
+    "risk_score": 0.94,
+    "decision": "high",
+    "summary": "High risk: 3 independent signals agree. Lookalike domain targeting AcmePay with a credential harvesting form.",
+    "reasons": [
+      { "signal": "domain_age", "contribution": 0.35, "detail": "Domain registered 2 days ago." },
+      { "signal": "brand_similarity", "contribution": 0.40, "detail": "94% visual match with AcmePay login page." },
+      { "signal": "auth_failure", "contribution": 0.19, "detail": "SPF and DKIM failed." }
+    ],
+    "timeline": [
+      { "ts": "2026-10-19T10:00:00Z", "stage": "monitor", "message": "Inbound email intercepted." },
+      { "ts": "2026-10-19T10:00:05Z", "stage": "investigate", "message": "Extracted URL and queried WHOIS." },
+      { "ts": "2026-10-19T10:00:10Z", "stage": "assess", "message": "Risk score calculated: 94 (HIGH)." }
+    ],
+    "actions": [
+      { "id": 1, "type": "block_url", "state": "pending_approval", "payload": { "url": "http://acmepay-secure-login.com" } }
+    ],
+    "evidence": {
+      "domain": { "registered": "2026-10-17", "registrar": "NameCheap" },
+      "email": {
+        "from": "security@acmepay-secure-login.com",
+        "subject": "Urgent: Your account is locked",
+        "auth": { "spf": "fail", "dkim": "fail", "dmarc": "fail" },
+        "links": ["http://acmepay-secure-login.com/login"],
+        "reply_to_mismatch": true,
+        "text": "Please verify your identity immediately to unlock your account."
+      },
+      "vision": { "brand": "AcmePay", "similarity": 0.94, "impersonation": true }
+    }
+  },
+  {
+    "id": 102,
+    "created_at": "2026-10-19T09:30:00Z",
+    "source": "manual_upload",
+    "target": "invoice-update-portal.net",
+    "target_type": "url",
+    "status": "awaiting_review",
+    "risk_score": 0.72,
+    "decision": "medium",
+    "summary": "Medium risk: Domain is newly registered, but no visual impersonation detected.",
+    "reasons": [
+      { "signal": "domain_age", "contribution": 0.40, "detail": "Domain registered 5 days ago." },
+      { "signal": "nlp_urgency", "contribution": 0.32, "detail": "Email uses high urgency language." }
+    ],
+    "timeline": [
+      { "ts": "2026-10-19T09:30:00Z", "stage": "monitor", "message": "Manual upload initiated." }
+    ],
+    "actions": [],
+    "evidence": {}
+  },
+  {
+    "id": 103,
+    "created_at": "2026-10-19T08:00:00Z",
+    "source": "email_gateway",
+    "target": "github.com",
+    "target_type": "domain",
+    "status": "actioned",
+    "risk_score": 0.05,
+    "decision": "low",
+    "summary": "Low risk: Known legitimate domain. Monitoring continues.",
+    "reasons": [
+      { "signal": "allowlist", "contribution": 0.10, "detail": "Domain is in the global allowlist." }
+    ],
+    "timeline": [],
+    "actions": [],
+    "evidence": {}
+  }
+]

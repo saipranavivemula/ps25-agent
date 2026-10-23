@@ -1,0 +1,6 @@
+{
+  "high_threshold": 0.85,
+  "medium_threshold": 0.60,
+  "auto_actions_enabled": false,
+  "allowlist": ["github.com", "google.com"]
+}
