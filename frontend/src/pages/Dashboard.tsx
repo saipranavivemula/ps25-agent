@@ -25,7 +25,8 @@ export default function Dashboard() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <KpiCard label="Threats analysed" value={stats.data?.total ?? "-"} />
         <KpiCard label="High risk" value={d?.high ?? "-"} />
-        <KpiCard label="Awaiting review" value={d?.medium ?? "-"} hint="Open the review queue" />
+        {/* 👇 THIS IS THE FIXED LINE 👇 */}
+        <KpiCard label="Awaiting review" value={stats.data?.awaiting_review ?? "-"} hint="Open the review queue" />
         <KpiCard label="Median detection time" value={(stats.data?.median_detection_seconds ?? 0).toFixed(1) + " s"} hint="Measured on this run" />
       </div>
 

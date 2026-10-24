@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     database_url: str = "sqlite:///./ps25.db"
-    protected_brands: str = "acmepay.com,acmebank.com"
+    protected_brands: str = "acmepay.com,acmebank.com,google.com,paypal.com,netflix.com,amazon.com,microsoft.com,apple.com,facebook.com,instagram.com"
     high_threshold: float = 0.95
     medium_threshold: float = 0.70
     auto_actions_enabled: bool = False

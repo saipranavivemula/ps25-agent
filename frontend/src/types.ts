@@ -80,6 +80,7 @@ export interface Policy {
 export interface Stats {
   total: number;
   by_decision: Record<Decision, number>;
+  awaiting_review: number; // 👈 ADDED THIS LINE
   median_detection_seconds: number;
   per_hour: { hour: string; count: number }[];
 }

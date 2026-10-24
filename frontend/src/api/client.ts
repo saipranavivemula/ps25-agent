@@ -31,7 +31,10 @@ export const api = {
 
   cases: async (qs = ""): Promise<{ total: number; items: CaseBrief[] }> => {
     if (IS_MOCK) { await delay(500); return { total: mockCases.length, items: mockCases as CaseBrief[] }; }
-    return request<{ total: number; items: CaseBrief[] }>("/api/cases" + qs);
+    
+    // Fetch the raw list from backend and wrap it so the UI is happy
+    const items = await request<CaseBrief[]>("/api/cases" + qs);
+    return { total: items.length, items: items };
   },
 
   case: async (id: number): Promise<CaseFull> => {
@@ -49,5 +52,36 @@ export const api = {
     return request<Policy>("/api/policy");
   },
 
-  // We will add the POST requests (analyze, approve, etc.) later!
+  // 👇 NEW ADDITIONS FOR ACTIONS AND REVIEWS 👇
+  actions: async (): Promise<any[]> => {
+    return request<any[]>("/api/actions");
+  },
+
+  approveAction: async (id: number): Promise<any> => {
+    return request<any>(`/api/actions/${id}/approve`, { method: "POST" });
+  },
+
+  reviewCase: async (id: number, verdict: string): Promise<any> => {
+    return request<any>(`/api/cases/${id}/review`, { 
+      method: "POST", 
+      body: JSON.stringify({ verdict, note: "Analyst review", analyst: "admin" }) 
+    });
+  },
+
+  // 👇 NEW ADDITION FOR POLICY UPDATES 👇
+  updatePolicy: async (data: any): Promise<any> => {
+    return request<any>("/api/policy", { 
+      method: "PUT", 
+      body: JSON.stringify(data) 
+    });
+  },
+
+  getModelMetrics: async (): Promise<any> => {
+    return request<any>("/api/models/metrics");
+  },
+
+  // 👇 NEW ADDITION FOR AUDIT LOGS 👇
+  auditLog: async (): Promise<any[]> => {
+    return request<any[]>("/api/audit");
+  },
 };

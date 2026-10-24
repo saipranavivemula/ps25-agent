@@ -4,16 +4,55 @@ import { api } from "../api/client";
 import type { Policy } from "../types";
 
 export default function PolicyPage() {
-  const { data: policy, isLoading } = useQuery({ queryKey: ["policy"], queryFn: api.policy });
+  // 👇 Added refetch so we can get fresh data after saving
+  const { data: policy, isLoading, refetch } = useQuery({ 
+    queryKey: ["policy"], 
+    queryFn: api.policy 
+  });
+  
   const [localPolicy, setLocalPolicy] = useState<Policy | null>(null);
   const [saved, setSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Use local state if editing, otherwise use fetched data
   const p = localPolicy || policy;
 
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+  const handleSave = async () => {
+    if (!p) return;
+    setIsSaving(true);
+    try {
+      await api.updatePolicy({
+        high_threshold: p.high_threshold,
+        medium_threshold: p.medium_threshold,
+        auto_actions_enabled: p.auto_actions_enabled,
+        allowlist: p.allowlist || []
+      });
+      setSaved(true);
+      setLocalPolicy(null); // Reset local state so it uses the fresh data
+      refetch(); // Fetch the updated policy from the backend
+      setTimeout(() => setSaved(false), 3000);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to save policy. Is the backend running?");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleAddDomain = () => {
+    const domain = prompt("Enter domain to allowlist (e.g., google.com):");
+    if (domain && p) {
+      const currentList = p.allowlist || [];
+      if (!currentList.includes(domain)) {
+        setLocalPolicy({ ...p, allowlist: [...currentList, domain] });
+      }
+    }
+  };
+
+  const handleRemoveDomain = (domainToRemove: string) => {
+    if (!p) return;
+    const currentList = p.allowlist || [];
+    setLocalPolicy({ ...p, allowlist: currentList.filter(d => d !== domainToRemove) });
   };
 
   if (isLoading || !p) return <div className="text-muted">Loading policy...</div>;
@@ -30,7 +69,7 @@ export default function PolicyPage() {
 
       {saved && (
         <div className="rounded-lg bg-ok/20 border border-ok text-ok px-4 py-2 text-sm font-bold">
-          Policy saved successfully (Dry-run).
+          Policy saved to database successfully!
         </div>
       )}
 
@@ -79,21 +118,34 @@ export default function PolicyPage() {
         <div>
           <h2 className="mb-3 text-sm font-bold text-accent">Global Allowlist</h2>
           <div className="flex flex-wrap gap-2">
-            {p.allowlist.map(domain => (
+            {/* Changed to use p.allowlist so it updates instantly when adding/removing */}
+            {(p.allowlist || []).map((domain) => (
               <span key={domain} className="rounded bg-black/40 border border-border/50 px-3 py-1 text-sm font-mono flex items-center gap-2">
                 {domain}
-                <button className="text-muted hover:text-danger">&times;</button>
+                <button 
+                  onClick={() => handleRemoveDomain(domain)}
+                  className="text-muted hover:text-danger font-bold"
+                >
+                  &times;
+                </button>
               </span>
             ))}
-            <button className="rounded border border-dashed border-muted text-muted hover:text-accent hover:border-accent px-3 py-1 text-sm">
+            <button 
+              onClick={handleAddDomain}
+              className="rounded border border-dashed border-muted text-muted hover:text-accent hover:border-accent px-3 py-1 text-sm transition-colors"
+            >
               + Add Domain
             </button>
           </div>
         </div>
 
         <div className="pt-4 border-t border-border/30 flex justify-end">
-          <button onClick={handleSave} className="rounded-lg bg-accent px-6 py-2 font-bold text-black hover:bg-accent/80">
-            Save Policy
+          <button 
+            onClick={handleSave} 
+            disabled={isSaving}
+            className="rounded-lg bg-accent px-6 py-2 font-bold text-black hover:bg-accent/80 disabled:opacity-50"
+          >
+            {isSaving ? "Saving..." : "Save Policy"}
           </button>
         </div>
       </div>

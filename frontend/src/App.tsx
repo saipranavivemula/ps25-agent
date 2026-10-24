@@ -1,7 +1,8 @@
+import Cases from "./pages/Cases";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, NavLink, Outlet } from "react-router-dom";
-import { LayoutDashboard, Search, Inbox, Sliders, Brain, ScrollText, MonitorPlay } from "lucide-react";
+import { LayoutDashboard, Search, Inbox, Sliders, Brain, ScrollText, MonitorPlay, FileText } from "lucide-react";
 import Dashboard from "./pages/Dashboard";
 import CaseDetail from "./pages/CaseDetail";
 import Review from "./pages/Review";
@@ -16,6 +17,7 @@ const qc = new QueryClient({
 
 const NAV = [
   { to: "/", label: "Dashboard", Icon: LayoutDashboard },
+  { to: "/cases", label: "All Cases", Icon: FileText }, // 👈 ADDED ALL CASES HERE
   { to: "/analyze", label: "Analyze", Icon: Search },
   { to: "/review", label: "Review Queue", Icon: Inbox },
   { to: "/policy", label: "Policy", Icon: Sliders },
@@ -91,6 +93,7 @@ export default function App() {
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/models" element={<Models />} />
             <Route path="/audit" element={<Audit />} />
+            <Route path="/cases" element={<Cases />} />
           </Route>
         </Routes>
       </BrowserRouter>

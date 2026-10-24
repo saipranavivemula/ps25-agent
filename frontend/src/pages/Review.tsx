@@ -5,22 +5,66 @@ import { api } from "../api/client";
 import DecisionBadge from "../components/DecisionBadge";
 
 export default function Review() {
-  const { data, isLoading } = useQuery({ 
+  // Fetch cases awaiting review
+  const { data, isLoading, refetch: refetchCases } = useQuery({ 
     queryKey: ["cases", "review"], 
     queryFn: () => api.cases() 
   });
 
-  // We only want to show cases that are "awaiting_review"
+  // Fetch all actions so we can find the block action for a case
+  const { data: actionsData, refetch: refetchActions } = useQuery({
+    queryKey: ["actions"],
+    queryFn: () => api.actions()
+  });
+
   const cases = data?.items.filter(c => c.status === "awaiting_review") || [];
   const [selectedCase, setSelectedCase] = useState<number | null>(cases[0]?.id || null);
   
-  // Fake toast message state
   const [toast, setToast] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleAction = (action: string) => {
-    setToast(`Action ${action} recorded (dry-run: no real system changed).`);
-    setTimeout(() => setToast(""), 4000); // Hide toast after 4 seconds
-  };
+  async function handleApprove(caseId: number) {
+    if (!actionsData) return;
+    setIsProcessing(true);
+    try {
+      // 1. Find the pending action for this case
+      const action = actionsData.find(a => a.case_id === caseId && a.state === "pending_approval");
+      
+      // 2. If an action exists, approve it (this triggers the SIMULATED block in terminal)
+      if (action) {
+        await api.approveAction(action.id);
+      }
+      
+      // 3. Mark the case as confirmed in the database
+      await api.reviewCase(caseId, "confirmed");
+      
+      setToast("Action Approved & Executed! Check backend terminal.");
+      refetchCases();
+      refetchActions();
+      setSelectedCase(null);
+    } catch (e) {
+      setToast("Failed to approve action.");
+      console.error(e);
+    } finally {
+      setIsProcessing(false);
+      setTimeout(() => setToast(""), 4000);
+    }
+  }
+
+  async function handleFalsePositive(caseId: number) {
+    setIsProcessing(true);
+    try {
+      await api.reviewCase(caseId, "false_positive");
+      setToast("Case marked as False Positive.");
+      refetchCases();
+      setSelectedCase(null);
+    } catch (e) {
+      setToast("Failed to update case.");
+    } finally {
+      setIsProcessing(false);
+      setTimeout(() => setToast(""), 4000);
+    }
+  }
 
   if (isLoading) return <div className="text-muted">Loading queue...</div>;
 
@@ -70,26 +114,21 @@ export default function Review() {
             <div className="rounded-xl border border-border/60 bg-panel/60 p-6 space-y-6">
               <div>
                 <h2 className="font-mono text-xl">{activeCase.target}</h2>
-                {/* 👇 THIS IS THE FIXED LINE */}
                 <p className="text-sm text-muted mt-2">Reviewing threat target: {activeCase.target}</p>
               </div>
 
               <div className="flex gap-3 border-t border-border/30 pt-4">
                 <button 
-                  onClick={() => handleAction("Approve")}
-                  className="rounded-lg bg-accent px-4 py-2 font-bold text-black hover:bg-accent/80"
+                  onClick={() => handleApprove(activeCase.id)}
+                  disabled={isProcessing}
+                  className="rounded-lg bg-accent px-4 py-2 font-bold text-black hover:bg-accent/80 disabled:opacity-50"
                 >
-                  Approve Action
+                  {isProcessing ? "Processing..." : "Approve Action"}
                 </button>
                 <button 
-                  onClick={() => handleAction("Reject")}
-                  className="rounded-lg border border-muted text-muted px-4 py-2 font-bold hover:bg-white/5"
-                >
-                  Reject
-                </button>
-                <button 
-                  onClick={() => handleAction("False Positive")}
-                  className="rounded-lg border border-warn text-warn px-4 py-2 font-bold hover:bg-warn/10"
+                  onClick={() => handleFalsePositive(activeCase.id)}
+                  disabled={isProcessing}
+                  className="rounded-lg border border-warn text-warn px-4 py-2 font-bold hover:bg-warn/10 disabled:opacity-50"
                 >
                   Mark False Positive
                 </button>

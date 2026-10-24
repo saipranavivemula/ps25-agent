@@ -1,10 +1,14 @@
+import { useQuery } from "@tanstack/react-query";
+import { api } from "../api/client";
+
 export default function Audit() {
-  // Mock audit data to show the judges
-  const logs = [
-    { id: 1, time: "10:05:22 AM", actor: "analyst_1", event: "ACTION_APPROVED", case: "acmepay-secure-login.com", details: "Block URL executed." },
-    { id: 2, time: "10:02:10 AM", actor: "system_agent", event: "CASE_CREATED", case: "acmepay-secure-login.com", details: "Risk score 94. High risk detected." },
-    { id: 3, time: "09:45:00 AM", actor: "analyst_2", event: "FALSE_POSITIVE", case: "invoice-update-portal.net", details: "Added to monitoring list. No block." },
-  ];
+  // Fetch real logs from the backend
+  const { data: logs, isLoading } = useQuery({ 
+    queryKey: ["audit"], 
+    queryFn: api.auditLog 
+  });
+
+  if (isLoading) return <div className="text-muted">Loading audit trail...</div>;
 
   return (
     <div className="space-y-6">
@@ -25,23 +29,58 @@ export default function Audit() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border/30">
-            {logs.map((log) => (
-              <tr key={log.id} className="hover:bg-panel transition-colors">
-                <td className="px-4 py-3 font-mono text-xs">{log.time}</td>
-                <td className="px-4 py-3 font-mono">
-                  <span className={log.actor === "system_agent" ? "text-accent" : "text-ok"}>
-                    {log.actor}
-                  </span>
+            {logs?.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="px-4 py-8 text-center text-muted">
+                  No audit logs yet. Run an analysis or approve an action to generate logs.
                 </td>
-                <td className="px-4 py-3">
-                  <span className="rounded border border-border/50 px-2 py-0.5 text-xs font-bold">
-                    {log.event}
-                  </span>
-                </td>
-                <td className="px-4 py-3 font-mono text-xs">{log.case}</td>
-                <td className="px-4 py-3 text-muted">{log.details}</td>
               </tr>
-            ))}
+            ) : (
+              logs?.map((log) => {
+                // 👇 FIX: Convert UTC to Indian Standard Time (IST)
+                // The backend sends naive UTC strings, so we append 'Z' to tell JS it's UTC.
+                const utcString = log.ts.endsWith("Z") ? log.ts : log.ts + "Z";
+                const time = new Date(utcString).toLocaleTimeString('en-IN', { 
+                  hour: '2-digit', 
+                  minute: '2-digit', 
+                  second: '2-digit',
+                  timeZone: 'Asia/Kolkata' // Forces Indian Standard Time
+                });
+                
+                // Format the details object into a readable string
+                const detailsText = log.details 
+                  ? Object.entries(log.details).map(([k, v]) => `${k}: ${v}`).join(", ") 
+                  : "—";
+
+                // Color the event badges based on the event type
+                let eventColor = "text-muted border-border/50";
+                if (log.event.includes("created")) eventColor = "text-accent border-accent/50 bg-accent/10";
+                if (log.event.includes("executed") || log.event.includes("approved")) eventColor = "text-ok border-ok/50 bg-ok/10";
+                if (log.event.includes("reviewed")) eventColor = "text-warn border-warn/50 bg-warn/10";
+
+                return (
+                  <tr key={log.id} className="hover:bg-panel transition-colors">
+                    <td className="px-4 py-3 font-mono text-xs">{time}</td>
+                    <td className="px-4 py-3 font-mono">
+                      <span className={log.actor === "system" || log.actor === "system_agent" ? "text-accent" : "text-ok"}>
+                        {log.actor}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`rounded border px-2 py-0.5 text-xs font-bold uppercase ${eventColor}`}>
+                        {log.event.replace(/_/g, " ")}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 font-mono text-xs max-w-[200px] truncate" title={log.target || "N/A"}>
+                      {log.target || "—"}
+                    </td>
+                    <td className="px-4 py-3 text-muted text-xs">
+                      {detailsText}
+                    </td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
       </div>
